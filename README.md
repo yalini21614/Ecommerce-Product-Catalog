@@ -1,146 +1,131 @@
-# ⚡ PulseStore — Full-Stack Capstone E-Commerce Web Application
+# ⚡ PulseCatalog — Modern E-Commerce Product Catalog
 
-> **Web Development Capstone Project**  
-> **Student:** Final Year Computer Science & Engineering  
-> **Status:** Production-Ready • Fully Responsive • Deployed Architecture  
+> **A Production-Ready, Full-Stack Web Development Capstone Project**  
+> Built with **React.js**, **JavaScript (ES6+)**, **Tailwind CSS**, and **Vite**.
 
----
-
-## 📌 Executive Summary & Abstract
-
-**PulseStore** is an enterprise-grade, high-performance E-Commerce platform built to demonstrate end-to-end full-stack web engineering principles. The application bridges modern user-centric interfaces with robust client-side routing, modular component architecture, multi-tiered state management, and optimized asset bundling.
-
-Designed with **React 18+**, **TypeScript**, **Tailwind CSS**, and **Vite**, PulseStore simulates real-world production environments including network latency simulation, dynamic stock allocation, persistent cart and wishlist states, multi-step checkout with instant payment authorization, and an operations management dashboard for store administrators.
+[![Deployment Status](https://img.shields.io/badge/Deployment-Vercel%20Ready-success?style=for-the-badge&logo=vercel)](https://vercel.com)
+[![React Version](https://img.shields.io/badge/React-18.3-blue?style=for-the-badge&logo=react)](https://react.dev)
+[![Vite](https://img.shields.io/badge/Bundler-Vite%206-purple?style=for-the-badge&logo=vite)](https://vitejs.dev)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
 ---
 
-## 🏛️ System Architecture
+## 📖 Project Description
 
-```mermaid
-graph TD
-    Client[Web Browser Client] -->|HTTP / HTTPS| CDN[CDN Edge Cache / Hosting]
-    Client -->|React Router v6| Router[Client-Side Router]
-    
-    subgraph Frontend Architecture
-        Router --> Home[HomePage]
-        Router --> Catalog[CatalogPage]
-        Router --> Product[ProductDetailPage]
-        Router --> Cart[Cart & Checkout Flow]
-        Router --> Orders[Order Tracking]
-        Router --> Admin[Admin Portal]
+**PulseCatalog** is an enterprise-grade E-Commerce Product Catalog web application developed as a final-year Computer Science portfolio capstone. The application addresses standard e-commerce workflows: instant product discovery, multi-category faceted filtering, client-side dynamic search, interactive product detail showcases, and real-time shopping cart calculations with persistent local storage.
 
-        subgraph Global Reactive State
-            CartContext[Cart Context]
-            WishlistContext[Wishlist Context]
-            ThemeContext[Theme Context (Dark/Light)]
-            ToastContext[Notification Engine]
-        end
-
-        subgraph Service & Data Layer
-            APIService[Simulated REST API Service Layer]
-            LocalStorage[Browser Persistent Store]
-        end
-    end
-
-    CartContext <--> LocalStorage
-    WishlistContext <--> LocalStorage
-    APIService <--> LocalStorage
-```
+The frontend is architected as a **Single Page Application (SPA)** using **React Router v6** with route-level code splitting (`React.lazy` + `Suspense`) to provide lightning-fast, sub-100ms transitions without full-page reloads.
 
 ---
 
-## 🚀 Key Features & Deliverables
+## 🌟 Key Features
 
-### 1. 🛍️ Modular Customer Catalog Experience
-- **Faceted Search & Filtering:** Dynamic category filters, interactive price range sliders, minimum star ratings, and real-time stock availability toggles.
-- **Debounced Live Autocomplete:** Instant search suggestions as the user types without triggering unnecessary re-renders or queries.
-- **Dynamic Layout Switcher:** Seamless switching between Grid and List view layouts.
-- **Sorting Engine:** Sort products by Featured, Price (Ascending/Descending), Top Rated, and Newest Arrivals.
+### 🛍️ Product Discovery & Catalog
+- **Interactive Product Grid & Cards:** High-resolution product images, badges (`Best Seller`, `New`, `Sale`), department categories, real-time stock indicators, and customer star rating summaries.
+- **Client-Side Live Search:** Instant keyword searching across product titles, descriptions, and categories.
+- **Faceted Category Filters:** Interactive department tabs (`All`, `Audio`, `Wearables`, `Electronics`, `Accessories`).
+- **Dynamic Sorting:** Sort by Featured, Price (Low to High), Price (High to Low), and Highest Rated.
+- **Active Filter Chips:** One-click removal of active category or search filters.
 
-### 2. 🔍 Rich Product Detail Engine (`/product/:id`)
-- **Interactive Multi-Image Gallery:** Thumbnail picker with high-resolution active image preview.
-- **Variant Selector:** Interactive color options with real-time stock synchronization.
-- **Key Specifications & Features Checklist:** Hardware spec matrix for engineering comparison.
-- **Verified Customer Review System:** Interactive review modal allowing users to post verified star ratings and feedback with real-time score recalculation.
-- **Smart Related Gear Recommendations:** Content-based recommendation algorithm presenting relevant products in the same category.
+### 🔍 Product Details Page (`/products/:id`)
+- Deep-linked dynamic routing (`/products/:id`).
+- High-res image display with promotional badges.
+- Star rating breakdown with verified customer review counts.
+- Dynamic stock availability counter.
+- Quantity selector stepper (+ / -).
+- Interactive "Add to Cart" and "Buy Now" actions.
+- Content-based "Related Hardware" recommendations row.
 
-### 3. 🛒 Cart, Coupons & Multi-Step Checkout Flow
-- **Slide-Out Quick Cart Drawer + Full Cart View:** Fluid accessibility with quantity steppers and line-item removals.
-- **Dynamic Promo Engine:** Supports coupon codes (e.g., `STUDENT20` for 20% off, `SAVE10` for 10% off).
-- **Free Shipping Threshold Bar:** Gamified visual progress bar indicating remaining spend needed for free express shipping.
-- **3-Step Checkout:** 
-  1. Shipping Address verification.
-  2. Courier delivery speed selection (Standard vs Priority Air Express).
-  3. Secure simulated payment (Credit Card / UPI / Cash on Delivery).
-- **Printable Invoices:** Instant generation of order IDs with printable receipt view (`window.print()`).
+### 🛒 Shopping Cart & Order Engine (`/cart`)
+- Dedicated cart view with individual item subtotals, quantity adjustments, and remove actions.
+- Gamified Free Express Shipping progress meter ($150 spend threshold).
+- Real-time price breakdown: Subtotal, Shipping, 8% Sales Tax, and Grand Total.
+- Clear cart option.
+- Interactive Simulated Checkout with order confirmation screen and cart reset.
+- Persistent `localStorage` sync: Cart data remains saved across browser refreshes and tab closures.
 
-### 4. 📦 Live Order Lifecycle Tracking (`/orders`)
-- Real-time progress timeline visualizing 4 stages: `Processing` ➔ `Confirmed` ➔ `Shipped` ➔ `Delivered`.
-
-### 5. 🛠️ Merchant / Admin Operations Portal (`/admin`)
-- **Real-Time KPI Dashboard:** High-level metrics for Total Store Revenue, Processed Orders Count, Active Catalog Items, and Low Stock Alerts.
-- **Inventory CRUD:** Add new hardware products with image URLs, prices, stock, and promotional badges; inline quick-editing of stock levels and pricing; delete products.
-- **Order Dispatch Management:** Transition order statuses to update customer tracking in real time.
-- **Demo Reset Button:** One-click restoration of initial seed data for presentation defenses.
+### 🎨 Modern UI/UX & Accessibility
+- Fully responsive across Mobile, Tablet, and Desktop breakpoints.
+- Semantic HTML tags (`<header>`, `<nav>`, `<main>`, `<article>`, `<footer>`).
+- Standard ARIA attributes (`aria-label`, `role="tablist"`, `aria-selected`, `aria-live`).
+- Keyboard-friendly inputs and accessible buttons.
+- Dedicated empty states, loading indicators, and error banners with retry triggers.
 
 ---
 
-## ⚙️ Technology Stack & Justification
+## 🛠️ Tech Stack
 
-| Layer | Technology | Architectural Justification |
+| Domain | Technology | Description |
 | :--- | :--- | :--- |
-| **Language** | TypeScript | Strong typing prevents runtime errors, ensures strict interface compliance across domain models, and facilitates enterprise maintainability. |
-| **Framework** | React 18+ | Declarative component model, React Hooks (`useMemo`, `useCallback`), and concurrent rendering features. |
-| **Bundler / Build** | Vite 6 | Lightning-fast Hot Module Replacement (HMR), Rollup-based production chunking, and instant cold starts. |
-| **Styling** | Tailwind CSS | Utility-first responsive design, modern dark-mode implementation via CSS classes, zero CSS bloat via PurgeCSS. |
-| **Routing** | React Router v6 | Declarative client-side routing, URL search parameter synchronization, route guards, and 404 handling. |
-| **Icons** | Lucide React | Clean, modern feather-based SVG icon suite. |
-| **Deployment** | Vercel / Netlify | Edge CDN delivery with SPA rewrite fallback rules (`vercel.json` & `_redirects`). |
+| **Framework** | [React 18](https://react.dev/) | Component architecture, Hooks (`useState`, `useEffect`, `useMemo`, `useContext`) |
+| **Language** | JavaScript (ES6+) | Modern JavaScript with JSX syntax |
+| **Routing** | [React Router v6](https://reactrouter.com/) | Client-side declarative SPA routing with dynamic parameters |
+| **Styling** | [Tailwind CSS 3](https://tailwindcss.com/) | Responsive design tokens, modern color palettes, and utility classes |
+| **Bundler & HMR** | [Vite 6](https://vitejs.dev/) | High-speed Hot Module Replacement and Rollup-optimized production builds |
+| **Icons** | [Lucide React](https://lucide.dev/) | Accessible, modern feather vector icons |
+| **Deployment** | [Vercel](https://vercel.com) | Edge CDN hosting with SPA rewrite configuration |
 
 ---
 
-## 📦 Project Directory Structure
+## 📂 Project Structure
 
 ```
-pulse-store-capstone/
+new project/
 ├── public/
-│   ├── _redirects            # Netlify client-side routing fallback rule
-│   └── favicon.svg           # Brand SVG vector icon
+│   ├── _redirects              # Netlify SPA fallback rule
+│   └── favicon.svg             # Vector brand icon
 ├── src/
-│   ├── components/
-│   │   ├── common/           # Navbar, Footer, Skeleton loaders
-│   │   ├── catalog/          # ProductCard (Grid/List), FilterSidebar
-│   │   └── cart/             # CartDrawer, Cart items
-│   ├── context/              # CartContext, WishlistContext, ThemeContext, ToastContext
-│   ├── data/                 # Seed catalog dataset, reviews
-│   ├── hooks/                # useDebounce custom hook
-│   ├── pages/                # Home, Catalog, ProductDetail, Cart, Checkout, OrderSuccess, Orders, Wishlist, Admin, NotFound
-│   ├── services/             # Simulated REST API layer & localStorage persistence
-│   ├── types/                # Domain TypeScript interfaces (Product, Order, CartItem, Review)
-│   ├── App.tsx               # Root component with route-level code splitting
-│   ├── main.tsx              # StrictMode entrypoint
-│   └── index.css             # Tailwind base & custom scrollbar directives
-├── vercel.json               # Vercel SPA rewrite configuration
-├── package.json              # Dependencies and build scripts
-├── tailwind.config.js        # Design system tokens and dark mode configuration
-└── vite.config.ts            # Rollup manual chunking & asset optimization
+│   ├── assets/                 # Static media and graphics
+│   ├── components/             # Reusable UI component library
+│   │   ├── CategoryFilter.jsx  # Category tab filtering
+│   │   ├── ErrorMessage.jsx    # Error banner with retry button
+│   │   ├── Footer.jsx          # Semantic footer with navigation
+│   │   ├── Loading.jsx         # Accessible loading spinner
+│   │   ├── Navbar.jsx          # Responsive navigation & cart badge
+│   │   ├── ProductCard.jsx     # Reusable product card
+│   │   ├── ProductGrid.jsx     # Responsive product grid & empty state
+│   │   └── SearchBar.jsx       # Search input with clear button
+│   ├── context/
+│   │   └── CartContext.jsx     # Global Cart state & localStorage sync
+│   ├── data/
+│   │   └── products.js         # Realistic product seed data & API service
+│   ├── pages/
+│   │   ├── About.jsx           # Architecture & capstone details
+│   │   ├── Cart.jsx            # Shopping cart & checkout simulation
+│   │   ├── Categories.jsx      # Department category showcase
+│   │   ├── Contact.jsx         # Contact form & developer info
+│   │   ├── Home.jsx            # Hero section & featured showcase
+│   │   ├── NotFound.jsx        # 404 handler page
+│   │   ├── ProductDetails.jsx  # Deep-linked product detail view
+│   │   └── Products.jsx        # Searchable, filterable catalog
+│   ├── styles/
+│   │   └── index.css           # Tailwind directives & custom scrollbars
+│   ├── App.jsx                 # Route-level code splitting (React.lazy)
+│   └── main.jsx                # React 18 entry point
+├── index.html                  # HTML5 entry with meta SEO tags
+├── package.json                # Project dependencies and npm scripts
+├── postcss.config.js           # PostCSS configuration
+├── tailwind.config.js          # Tailwind styling tokens
+├── vercel.json                 # Vercel SPA rewrite fallback configuration
+├── vite.config.js              # Vite bundler & manual chunking config
+└── README.md                   # University project documentation
 ```
 
 ---
 
-## 💻 Local Setup & Development Instructions
+## 💻 Installation & Local Development
 
 ### Prerequisites
 - **Node.js**: v18.0.0 or higher
 - **npm**: v9.0.0 or higher
 
-### Steps
-1. **Clone or Navigate to the project root:**
+### Step-by-Step Setup
+1. **Navigate to the project directory:**
    ```bash
    cd "new project"
    ```
 
-2. **Install all dependencies:**
+2. **Install project dependencies:**
    ```bash
    npm install
    ```
@@ -151,45 +136,68 @@ pulse-store-capstone/
    ```
    *The application will launch at `http://localhost:5173`.*
 
-4. **Create a production-ready optimized build:**
+4. **Build for production:**
    ```bash
    npm run build
    ```
+   *Generates minified, code-split production bundles in the `dist/` folder.*
 
-5. **Preview the production bundle locally:**
+5. **Preview production build locally:**
    ```bash
    npm run preview
    ```
 
 ---
 
-## 🌐 Live Deployment Instructions
+## 🌐 Deployment Instructions (Vercel)
 
-### Deploying to Vercel (Recommended)
-1. Push your repository to GitHub / GitLab.
-2. Log in to [Vercel](https://vercel.com) and click **"Add New Project"**.
-3. Import your repository.
-4. Framework preset: **Vite**.
-5. Click **Deploy**. *(The included `vercel.json` ensures all deep links like `/product/prod-1` or `/checkout` route correctly without 404 errors).*
+This project is pre-configured for zero-friction Vercel deployment using the included `vercel.json` rewrite file:
 
-### Deploying to Netlify
-1. Log in to [Netlify](https://www.netlify.com) and drag the `dist` folder into the Netlify Drop area, OR connect your GitHub repository.
-2. Build command: `npm run build`
-3. Publish directory: `dist`
-4. *(The included `public/_redirects` file automatically handles single-page routing).*
+### Option 1: Deploy via GitHub (Recommended)
+1. Initialize git and push to your GitHub account:
+   ```bash
+   git add .
+   git commit -m "feat: complete professional e-commerce product catalog"
+   git remote add origin https://github.com/<your-username>/<your-repo-name>.git
+   git push -u origin master
+   ```
+2. Log in to your [Vercel Dashboard](https://vercel.com/dashboard).
+3. Click **"Add New"** ➔ **"Project"** and import your GitHub repository.
+4. Framework Preset will be automatically detected as **Vite**.
+5. Click **"Deploy"**.
+6. Vercel will build the project and provide a live public URL (e.g. `https://pulse-catalog.vercel.app`).
+
+### Option 2: Deploy via Vercel CLI
+```bash
+npm install -g vercel
+vercel
+```
 
 ---
 
-## 🎓 Viva Voce / Project Defense Q&A
+## 🔗 Live Demo & Screenshots
 
-**Q1: Why use client-side routing instead of standard multi-page MPA navigation?**  
-*Answer:* Client-side routing intercepts browser navigation via the HTML5 History API. It loads the single-page application bundle once, and subsequent route transitions render asynchronously without a full page reload, resulting in sub-100ms transitions and preserving global client state (such as the cart and dark mode).
+- **Live URL (Placeholder):** `https://pulse-catalog-capstone.vercel.app`
+- **GitHub Repository:** `https://github.com/<your-username>/pulse-catalog-capstone`
 
-**Q2: How are assets and bundle sizes optimized in this project?**  
-*Answer:* 
-1. **Code Splitting & Lazy Loading:** Pages are loaded dynamically using `React.lazy()` and `Suspense`, ensuring users only download the code for the page they are viewing.
-2. **Rollup Manual Chunking:** In `vite.config.ts`, vendor libraries (`react`, `react-dom`, `react-router-dom`) and icons (`lucide-react`) are partitioned into independent chunks for optimal browser caching.
-3. **Tailwind Tree-Shaking:** Tailwind purges unused CSS rules during the build step, resulting in a minimal CSS footprint (<10KB).
+### 📸 Application Preview Placeholders
+| Page | Preview |
+| :--- | :--- |
+| **Home Page** | *Modern hero section, trust badges, and featured hardware grid* |
+| **Catalog Page** | *Real-time search, category chips, and price sorting* |
+| **Product Detail** | *Gallery, specifications, quantity stepper, and related recommendations* |
+| **Shopping Cart** | *Item quantities, free shipping progress bar, and order summary* |
 
-**Q3: How does state persistence work without a dedicated SQL/NoSQL cloud server?**  
-*Answer:* We implemented an asynchronous Service Layer (`src/services/api.ts`) that mirrors standard REST APIs with synthetic network latency (`setTimeout`). State mutations for orders, reviews, and inventory persist in browser `localStorage`, ensuring data survives tab closures, reloads, and offline demonstrations.
+---
+
+## 🚀 Future Roadmap & Improvements
+
+- [ ] **Backend Integration:** Connect to a Python FastAPI / Flask REST API backed by a PostgreSQL database.
+- [ ] **Real Payment Gateway:** Integrate Stripe / Razorpay Webhooks for real credit card processing.
+- [ ] **User Authentication:** Add JWT / Firebase authentication for personal user profiles and persistent order history.
+- [ ] **PWA Support:** Add a service worker for offline catalog caching and installable progressive web app capabilities.
+
+---
+
+## 📄 License
+This project is open-source and available under the [MIT License](LICENSE).
