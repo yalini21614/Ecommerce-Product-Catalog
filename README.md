@@ -177,8 +177,8 @@ vercel
 
 ## 🔗 Live Demo & Screenshots
 
-- **Live URL (Placeholder):** `https://pulse-catalog-capstone.vercel.app`
-- **GitHub Repository:** `https://github.com/<your-username>/pulse-catalog-capstone`
+- **Live URL (Placeholder):** `https://ecommerce-product-catalog-eight.vercel.app/
+- **GitHub Repository:** `https://github.com/yalini21614/Ecommerce-product-Catalog`
 
 ### 📸 Application Preview Placeholders
 | Page | Preview |
